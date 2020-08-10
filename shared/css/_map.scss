@@ -1,0 +1,85 @@
+@import "scrolly";
+@import "palette";
+
+.geo-map{background: #056DA1}
+
+.building{fill:#1896D7;}
+.dock{fill:#1896D7;}
+.grass, .park, .recreation_ground, .allotments, .forest, .cemetery{fill:#004E3A;}
+
+.water{stroke:#00B2FF; fill:#161616;}
+
+.service{fill:none;stroke:#161616;stroke-width:1px;}
+.tertiary{fill:none;stroke:#161616;stroke-width:1px;}
+.residential{fill:none;stroke:#161616;stroke-width:1px;}
+.pedestrian{fill:none;stroke:#161616;stroke-width:1px;}
+.trunk{fill:none;stroke:#161616;stroke-width:5px;}
+.secondary{fill:none;stroke:#161616;stroke-width:1px;}
+.primary{fill:none;stroke:#161616;stroke-width:3px;}
+.trunk_link{fill:none;stroke:#161616;stroke-width:5px;}
+.motorway_link{fill:none;stroke:#161616;stroke-width:5px;}
+.track{fill:none;stroke:#161616;stroke-width:1px;}
+.tertiary_link{fill:none;stroke:#161616;stroke-width:1px;}
+.living_street{fill:none;stroke:#161616;stroke-width:1px;}
+.path{fill:none;stroke:#161616;stroke-width:1px;}
+.steps{fill:none;stroke:#161616;stroke-width:1px;}
+.footway{fill:none;stroke:#161616;stroke-width:1px;}
+.cycleway{fill:none;stroke:#161616;stroke-width:1px;}
+.unknown{fill:none;stroke:#161616;stroke-width:1px;}
+.motorway{fill:none;stroke:#161616;stroke-width:5px;}
+.primary_link{fill:none;stroke:#161616;stroke-width:1px;}
+.secondary_link{fill:none;stroke:#161616;stroke-width:1px;}
+.unclassified{fill:none;stroke:#161616;stroke-width:1px;}
+.track_grade3{fill:none;stroke:#161616;stroke-width:1px;}
+.retail, .commercial{fill:none;}
+
+#map-container svg{
+	circle{fill:#F5BE2C; stroke: #161616;}
+}
+
+
+
+.scroll-inner{
+	background: white;
+}
+.scroll-text__inner{
+
+
+
+	@include mq($from: 100px, $until: 499px) {
+		height: auto;
+		margin-bottom:12px;
+    }
+
+}
+
+.scroll-text {
+    position: absolute;
+    top: 40px;
+    pointer-events: none;
+    right: 15px;
+
+    @include mq($from: 100px, $until: 499px) {
+                z-index: -1;
+                margin-top:calc(100% + 30px);
+    }
+}
+
+.scroll-text__div {
+
+	max-width: 350px;
+	margin-left: 10px;
+	margin-right: 10px;
+	background-color: #fff;
+	border: 2px solid #000;
+	box-shadow: 3px 4px 0 0 #767676;
+	box-sizing: border-box;
+	padding: 6px 10px 6px;
+
+    font-size: 20px;
+    line-height: 24px;
+    font-family: "Guardian Headline","Guardian Egyptian Web","Guardian Headline Full",Georgia,serif;
+    font-weight: normal;
+    font-size: 16px;
+    line-height: 24px;
+}
