@@ -33,13 +33,20 @@ class Map {
 		.attr('d', path)
 		.attr('class', d => d.properties.fclass)
 
-		svg.append('g')
-		.attr('class', "roads").selectAll('path')
-		.data(topojson.feature(features, features.objects.roads).features)
-		.enter()
-		.append('path')
-		.attr('d', path)
-		.attr('class', d => d.properties.fclass)
+		if(features.objects.roads)
+		{
+
+			svg.append('g')
+			.attr('class', "roads").selectAll('path')
+			.data(topojson.feature(features, features.objects.roads).features)
+			.enter()
+			.append('path')
+			.attr('d', path)
+			.attr('class', d => d.properties.fclass)
+
+		}
+
+		
 
 	}
 

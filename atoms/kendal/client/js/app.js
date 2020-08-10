@@ -37,34 +37,99 @@ const scrolly = new ScrollyTeller({
     transparentUntilActive: false
 });
 
-scrolly.addTrigger({num: 1, do: () => {
+d3.csv('<%= path %>/csv/High street map COVID_Impact_Selected_Towns_Final - Selected-data.csv')
+.then(fileRaw => {
 
-	console.log('1')
+	let shops = fileRaw.filter(s => s['Selected Town'] === 'Kendal')
 
-}});
+	dotsGroup
+		.selectAll('circle')
+		.data(shops)
+		.enter()
+		.append('circle')
+		.attr('class', d => 's' + d['Occupier ID'])
+		.attr('r', 4)
+		.attr('cx', d => map.getProjection([d.Longitude, d.Latitude])[0])
+		.attr('cy', d => map.getProjection([d.Longitude, d.Latitude])[1])
+
+	scrolly.addTrigger({num: 1, do: () => {
 
 
-scrolly.addTrigger({num: 2, do: () => {
+		shops.map(d => {
 
-	console.log(2)
+			if(d['Pre-lockdown'] != 'Open')
+			{
 
-	map.reset(highlightGroup)
+				dotsGroup.select('.s' + d['Occupier ID'])
+				.classed('Closed', true)
+				.classed('Open', false)
+			}
+			else
+			{
+				dotsGroup.select('.s' + d['Occupier ID'])
+				.classed('Closed', false)
+				.classed('Open', true)
+			}
+			
+		})
 
-	d3.csv('<%= path %>/csv/High street map COVID_Impact_Selected_Towns_Final - Selected-data.csv')
-	.then(fileRaw => {
 		
-			dotsGroup
-			.selectAll('circle')
-			.data(fileRaw)
-			.enter()
-			.append('circle')
-			.attr('r', 3)
-			.attr('cx', d => map.getProjection([d.Longitude, d.Latitude])[0])
-			.attr('cy', d => map.getProjection([d.Longitude, d.Latitude])[1])
-	})
 
-}});
 
-scrolly.watchScroll();
+	}});
+
+
+	scrolly.addTrigger({num: 2, do: () => {
+
+		shops.map(d => {
+
+
+			if(d['Lockdown'] != 'Open')
+			{
+
+				dotsGroup.select('.s' + d['Occupier ID'])
+				.classed('Closed', true)
+				.classed('Open', false)
+			}
+			else
+			{
+				dotsGroup.select('.s' + d['Occupier ID'])
+				.classed('Closed', false)
+				.classed('Open', true)
+			}
+			
+		})
+
+	}});
+
+	scrolly.addTrigger({num: 3, do: () => {
+
+
+		shops.map(d => {
+
+
+			if(d['Post Lockdown'] != 'Open')
+			{
+
+				dotsGroup.select('.s' + d['Occupier ID'])
+				.classed('Closed', true)
+				.classed('Open', false)
+			}
+			else
+			{
+				dotsGroup.select('.s' + d['Occupier ID'])
+				.classed('Closed', false)
+				.classed('Open', true)
+			}
+			
+		})
+
+	}});
+
+	scrolly.watchScroll();
+
+})
+
+
 
 

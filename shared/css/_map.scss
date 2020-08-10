@@ -3,9 +3,8 @@
 
 .geo-map{background: #056DA1}
 
-.building{fill:#1896D7;}
-.dock{fill:#1896D7;}
-.grass, .park, .recreation_ground, .allotments, .forest, .cemetery{fill:#004E3A;}
+.building, .dock, .industrial, .military{fill:#1896D7;}
+.grass, .park, .recreation_ground, .allotments, .forest, .cemetery, .farm, .meadow, .scrub, .nature_reserve, .heath{fill:#004E3A;}
 
 .water{stroke:#00B2FF; fill:#161616;}
 
@@ -31,11 +30,10 @@
 .secondary_link{fill:none;stroke:#161616;stroke-width:1px;}
 .unclassified{fill:none;stroke:#161616;stroke-width:1px;}
 .track_grade3{fill:none;stroke:#161616;stroke-width:1px;}
-.retail, .commercial{fill:none;}
+.retail, .commercial, .bridleway, .track_grade1, .track_grade2, {fill:none;}
 
-#map-container svg{
-	circle{fill:#F5BE2C; stroke: #161616;}
-}
+
+
 
 
 
@@ -82,4 +80,21 @@
     font-weight: normal;
     font-size: 16px;
     line-height: 24px;
+}
+
+/* #map-container svg {
+    circle{stroke: #red;}
+} */
+
+.Open{
+    fill-opacity: 1;
+    fill:#F5BE2C;
+    stroke: #161616;
+}
+
+.Closed{
+    fill:#ffffff;
+    stroke: #ffffff;
+    fill-opacity: 0.4;
+    stroke-opacity:1;
 }
