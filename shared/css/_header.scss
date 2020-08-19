@@ -27,12 +27,11 @@
       width: 940px;
     }
     @include mq(leftCol) {
-
       width: 950px;
       padding-bottom: 0px;
     }
     @include mq(wide) {
-            background-size: contain;
+      background-size: contain;
       background-position: left 0px top 0px;
       padding-bottom: 10px;
       width: 1030px;
@@ -230,7 +229,7 @@ a,
     }
   }
   .headline:after {
-    top: calc(32vw + 10px);
+    top: calc(50vw + 10px);
     width: calc(100% + 10px);
   }
   .standfirst {
