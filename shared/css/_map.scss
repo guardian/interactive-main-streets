@@ -1,5 +1,10 @@
 @import "scrolly";
 @import "palette";
+@import "enhancer";
+
+.content__main-column--interactive .element-atom{
+    margin-left: 0 !important;
+}
 
 .geo-map{background: #056DA1}
 
@@ -30,61 +35,8 @@
 .secondary_link{fill:none;stroke:#161616;stroke-width:1px;}
 .unclassified{fill:none;stroke:#161616;stroke-width:1px;}
 .track_grade3{fill:none;stroke:#161616;stroke-width:1px;}
-.retail, .commercial, .bridleway, .track_grade1, .track_grade2, {fill:none;}
+.retail, .commercial, .bridleway, .track_grade1, .track_grade2, .track_grade3, .track_grade4{fill:none;}
 
-
-
-
-
-
-.scroll-inner{
-	background: white;
-}
-.scroll-text__inner{
-
-
-
-	@include mq($from: 100px, $until: 499px) {
-		height: auto;
-		margin-bottom:12px;
-    }
-
-}
-
-.scroll-text {
-    position: absolute;
-    top: 40px;
-    pointer-events: none;
-    right: 15px;
-
-    @include mq($from: 100px, $until: 499px) {
-                z-index: -1;
-                margin-top:calc(100% + 30px);
-    }
-}
-
-.scroll-text__div {
-
-	max-width: 350px;
-	margin-left: 10px;
-	margin-right: 10px;
-	background-color: #fff;
-	border: 2px solid #000;
-	box-shadow: 3px 4px 0 0 #767676;
-	box-sizing: border-box;
-	padding: 6px 10px 6px;
-
-    font-size: 20px;
-    line-height: 24px;
-    font-family: "Guardian Headline","Guardian Egyptian Web","Guardian Headline Full",Georgia,serif;
-    font-weight: normal;
-    font-size: 16px;
-    line-height: 24px;
-}
-
-/* #map-container svg {
-    circle{stroke: #red;}
-} */
 
 .Open{
     fill-opacity: 1;
@@ -98,3 +50,95 @@
     fill-opacity: 0.4;
     stroke-opacity:1;
 }
+
+.locator-fill{
+    fill:#d6d6d6;
+}
+
+.locator-stroke{
+    fill:none;
+    stroke:#333;
+    stroke-width:2px;
+    stroke-linecap:round;
+}
+
+.locator-dot{
+    fill:#c70000;
+}
+
+.locator-text{
+    font-family: "Guardian Text Sans Web","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    paint-order: stroke;
+    stroke-width: 3px;
+    stroke: rgba(255, 255, 255, 0.85);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+
+}
+
+.locator-line{
+    fill:none;
+    stroke:#fff;
+    stroke-width:1px;
+}
+
+
+.map-text-top{
+    font-family: "Guardian Text Sans Web","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    paint-order: stroke;
+    stroke-width: 3px;
+    stroke: rgba(255, 255, 255, 0.85);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    text-anchor:middle;
+
+}
+
+.map-text-left{
+    font-family: "Guardian Text Sans Web","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    paint-order: stroke;
+    stroke-width: 3px;
+    stroke: rgba(255, 255, 255, 0.85);
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    text-anchor:end;
+
+}
+
+.Res{fill:gray;}
+.Bar{fill:red;}
+.Oth{fill:blue;}
+.Gro{fill:green;}
+.Hou{fill:black;}
+.Hea{fill:lightblue;}
+.Fas{fill:yellow;}
+
+
+.text-closed{
+    padding: 2px;
+    background-color: #056DA1;
+    color: white;
+}
+
+.text-open{
+    padding: 2px;
+    background-color: #F5BE2C;
+    color: white;
+}
+
+
+.blob-headline{
+    font-size: 22px;
+    font-weight: 900;
+    margin:0;
+    padding: 0!important;
+}
+
+
+

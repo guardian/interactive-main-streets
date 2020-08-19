@@ -1,0 +1,31 @@
+@import "fonts";
+@import "mq";
+@import "palette";
+@import "scrolly";
+// @import "enhancer";
+
+@import "map";
+
+.interactive-atom {
+    margin: 0;
+    padding: 0;
+}
+
+.slopes-container{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    background: white;
+    margin-left:240px;
+    @include mq($from: 100px, $until: 499px) {
+       margin-left:0px;
+    }
+}
+
+.sector-slope-container{
+    width:calc(25% - 2px);
+
+    @include mq($from: 100px, $until: 499px) {
+       width:50%;
+    }
+}

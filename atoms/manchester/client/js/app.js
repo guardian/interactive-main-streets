@@ -1,10 +1,9 @@
 import * as d3 from 'd3'
 import ScrollyTeller from "shared/js/scrollyteller"
 import Map from 'shared/js/map'
-
+import Locator from 'shared/js/locator'
 
 import manchester from 'assets/topojson/manchester.json'
-import spinningfields from 'assets/topojson/spinningfields.json'
 
 const atomEl = d3.select('#scrolly-1 #map-container').node();
 
@@ -24,32 +23,65 @@ let mapGroup = svg.append('g');
 
 let dotsGroup = svg.append('g');
 
-let scale = (512) * 0.5 / Math.PI * Math.pow(2, 15.5)
+let locatorGroup = svg.append('g');
 
-let center = [-2.25142, 53.48034]
+let margin = 0.001;
 
-let map = new Map({width:width, height:height, scale:scale, center:center})
-
-map.makeMap(mapGroup,manchester)
-
-const scrolly = new ScrollyTeller({
-	parent: document.querySelector("#scrolly-1"),
-    triggerTop: .5, // percentage from the top of the screen that the trigger should fire
-    triggerTopMobile: 0.75,
-    transparentUntilActive: false
-});
 
 d3.csv('<%= path %>/csv/High street map COVID_Impact_Selected_Towns_Final - Selected-data.csv')
 .then(fileRaw => {
 
+
 	let shops = fileRaw.filter(s => s['Selected Town'] === 'Spinningfield')
+
+	let minLat = d3.min(shops, d => +d.Latitude) - margin;
+	let maxLat = d3.max(shops, d => +d.Latitude) + margin;
+	let minLon = d3.min(shops, d => +d.Longitude);
+	let maxLon = d3.max(shops, d => +d.Longitude);
+
+	let extent = {
+        type: "LineString",
+        coordinates: [
+            [minLon, maxLat],
+            [maxLon, maxLat],
+            [maxLon, minLat],
+            [minLon, minLat],
+        ]
+    }
+
+	let map = new Map({width:width, height:height, extent:extent})
+
+	let locator = new Locator({width:isMobile ? 90 : 200, height:isMobile ? 120 : 250 })
+
+	locator.makeLocator(locatorGroup)
+
+	locator.makePoint(locatorGroup,[-2.25142, 53.48034], 'Manchester')
+
+	map.makeMap(mapGroup,manchester)
+
+	var line = {
+        type: "LineString",
+        coordinates: [
+            [-2.250443524478281, 53.481262092763714],
+            [-2.250443524478281, 53.482]
+        ]
+    }
+
+    map.makeLabel(mapGroup, line, 'Bridge street', 'top')
+
+	const scrolly = new ScrollyTeller({
+		parent: document.querySelector("#scrolly-1"),
+	    triggerTop: .5, // percentage from the top of the screen that the trigger should fire
+	    triggerTopMobile: 0.75,
+	    transparentUntilActive: false
+	});
 
 	dotsGroup
 		.selectAll('circle')
 		.data(shops)
 		.enter()
 		.append('circle')
-		.attr('class', d => 's' + d['Occupier ID'])
+		.attr('class', d => 's' + d['Occupier ID'] + ' Open')
 		.attr('r', 4)
 		.attr('cx', d => map.getProjection([d.Longitude, d.Latitude])[0])
 		.attr('cy', d => map.getProjection([d.Longitude, d.Latitude])[1])
@@ -131,7 +163,6 @@ d3.csv('<%= path %>/csv/High street map COVID_Impact_Selected_Towns_Final - Sele
 	scrolly.watchScroll();
 
 })
-
 
 
 

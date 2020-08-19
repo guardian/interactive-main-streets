@@ -5,16 +5,12 @@ import textures from 'textures'
 let projection;
 let path;
 
-window.pro = projection;
-
 class Map {
 
 	constructor(params){
 
 		projection = d3.geoMercator()
-		.center(params.center)
-		.translate([params.width/2, params.height/2])
-		.scale(params.scale);
+		.fitExtent([[0, 0], [params.width, params.height]], params.extent);
 
 		path = d3.geoPath()
 		.projection(projection)
@@ -23,8 +19,6 @@ class Map {
 
 	makeMap(svg, features){
 
-		console.log(features)
-
 		svg.append('g')
 		.attr('class', "features").selectAll('path')
 		.data(topojson.feature(features, features.objects.features).features)
@@ -32,6 +26,10 @@ class Map {
 		.append('path')
 		.attr('d', path)
 		.attr('class', d => d.properties.fclass)
+
+	svg.on("click", function() {
+  		console.log(projection.invert(d3.mouse(this)));
+	});
 
 		if(features.objects.roads)
 		{
@@ -76,10 +74,42 @@ class Map {
 	}
 
 
+	makeLabel(svg, line, text, orientation){
+
+		svg
+			.append('path')
+			.datum(line)
+		    .attr("class", "locator-line")
+		    .attr("d", path);
+
+
+		switch(orientation)
+		{
+			case 'top':
+		    svg
+			.append('text')
+			.attr('class', 'map-text-top')
+			.text(text)
+			.attr('x', d => projection(line.coordinates[0])[0])
+			.attr('y', d => projection(line.coordinates[1])[1] - 5)
+			break;
+
+			case 'left':
+		    svg
+			.append('text')
+			.attr('class', 'map-text-left')
+			.text(text)
+			.attr('x', d => projection(line.coordinates[1])[0] - 5)
+			.attr('y', d => projection(line.coordinates[1])[1])
+		}
+
+		
+
+	}
+
+
 	reset(svg){
-
 		svg.selectAll().remove();
-
 	}
 
 
@@ -87,6 +117,10 @@ class Map {
 
 		return projection(params)
 
+	}
+
+	getPath(){
+		return path
 	}
 
 		
